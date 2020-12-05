@@ -45,13 +45,12 @@ app.post('/', async function(request, response){
        email_addr: "rute.s.abreu@gmail.com",
        wml_url: "https://us-south.ml.cloud.ibm.com/ml/v4/deployments/8864784a-4ab4-42f5-a5a8-1d66d3af9d9d/predictions",
        iam_token: String(getTk.data.access_token),
-       submit_confirmation: false,
+       submit_confirmation: true,
     }
     url_os = "http://172.21.86.186:5000/submit"
 
     axios.post(url_os, data).then(function(response){
         console.log(response)
-        request.send(response.data.message)
     }).catch(function(err){
         console.log(err)
     })
