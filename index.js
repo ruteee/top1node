@@ -49,11 +49,11 @@ app.post('/', async function(request, response){
     }
     url_os = "http://172.21.86.186:5000/submit"
 
-    // axios.post(url_os, data).then(function(response){
-    //     console.log(response)
-    // }).catch(function(err){
-    //     console.log(err)
-    // })
+    axios.post(url_os, data).then(function(response){
+        console.log(response)
+    }).catch(function(err){
+        console.log(err)
+    })
     response.send(request.body)
 });
 
