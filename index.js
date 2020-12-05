@@ -51,7 +51,7 @@ app.post('/', async function(request, response){
 
     axios.post(url_os, data).then(function(response){
         console.log(response)
-        response.send(response.data.message)
+        request.send(response.data.message)
     }).catch(function(err){
         console.log(err)
     })
