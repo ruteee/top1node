@@ -18,6 +18,11 @@ let config = {
     headers: {
         "Content-Type": "application/x-www-form-urlencoded",
         "Accept": "application/json" 
+    },
+
+    params:{
+        "grant_type":"urn:ibm:params:oauth:grant-type:apikey",
+        "apikey": "c4uY7MPLjBZryuVeqf31dv2VI92c7XJ98ucV7VA1jo3f"
     }
   }
 
@@ -29,38 +34,23 @@ app.get('/', (_, response) =>{
 
 function getToken(){
     url = "https://iam.cloud.ibm.com/identity/token"
-    params = {
-        "grant_type":"urn:ibm:params:oauth:grant-type:apikey",
-        "apikey": "c4uY7MPLjBZryuVeqf31dv2VI92c7XJ98ucV7VA1jo3f"
-    }
-    token = axios.post(url, null, params, config).then(function (response) {
-        console.log(response.config.headers);
-      })
-      .catch(function (error) {
+    
+    token = axios.post(url, null, config).then(function (response) {
+        console.log(response.data.access_token)
+    }).catch(function (error) {
         console.log(error);
       });
 
 }
 
-// app.get('/get', async (_, response) =>{
-//     let data = ""
-//     try{
-//         data = await getToken()
-//     }catch(err){
-//         response.send(err.message)
-//     }        
-    
-//     console.log(data.data)
-//     return response.send(data.data)
-// })
 
+app.post('/', async function(request, response){
 
-
-app.post('/', function(request, response){
+    let my_token = await getToken()
     data = {
         email_addr: "rute.s.abreu@gmail.com",
         wml_url: "https://us-south.ml.cloud.ibm.com/ml/v4/deployments/8864784a-4ab4-42f5-a5a8-1d66d3af9d9d/predictions",
-        iam_token: acess_token,
+        iam_token: my_token,
         submit_confirmation: false
     }
     url_os = "http://172.21.86.186:5000/submit"
@@ -73,10 +63,5 @@ app.post('/', function(request, response){
     // response.send(request.body)
 });
 
-async function get_pokemon(){
-    let data = ""
-    data = await axios.get(url_poke)
-    return data
-}
-
+getToken()
 app.listen(8080, () => console.log("App Inicializado"))
