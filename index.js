@@ -40,11 +40,11 @@ function getToken(){
 
 app.post('/', async function(request, response){
 
-    let my_token = await getToken()
+    let getTk = await getToken()
     data = {
         email_addr: "rute.s.abreu@gmail.com",
         wml_url: "https://us-south.ml.cloud.ibm.com/ml/v4/deployments/8864784a-4ab4-42f5-a5a8-1d66d3af9d9d/predictions",
-        iam_token: my_token,
+        iam_token: getTk.data.acess_token,
         submit_confirmation: false
     }
     url_os = "http://172.21.86.186:5000/submit"
@@ -54,7 +54,7 @@ app.post('/', async function(request, response){
     }).catch(function(err){
         console.log(err)
     })
-    response.send(request.body)
+    response.send('OK')
 });
 
 app.listen(8080, () => console.log("App Inicializado"))
