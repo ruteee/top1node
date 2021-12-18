@@ -4,7 +4,7 @@ const axios  = require('axios')
 const app = express();
 app.use(express.json())
 
-app.post('/', async function(request, response){
+app.get('/', async function(request, response){
 
     let data = {
         "email": "rute.s.abreu@gmail.com",
@@ -16,7 +16,7 @@ app.post('/', async function(request, response){
     }
     url_os = "http://172.21.188.211:3000/submit"
 
-    await axios.get(url_os, null, {
+    await axios.post(url_os, null, {
         headers: {
             'content-type':'application/json'
         }
