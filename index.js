@@ -16,7 +16,7 @@ app.post('/', async function(request, response){
     }
     url_os = "http://172.21.188.211:3000/submit"
 
-    await axios.post(url_os, data, {
+    await axios.post(url_os, null, {
         headers: {
             'content-type':'application/json'
         }
