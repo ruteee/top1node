@@ -42,7 +42,7 @@ app.post('/', async function(request, response){
     url_os = "http://172.21.188.211:3000/submit"
 
     axios.post(url_os, data).then(function(response){
-        console.log(response)
+        console.log("Enviei")
     }).catch(function(err){
         console.log(err)
     })
@@ -50,4 +50,5 @@ app.post('/', async function(request, response){
 });
 
 
-app.listen(8080, () => app.post())
+app.listen(8080, () => console.log("escutando"))
+app.post()
