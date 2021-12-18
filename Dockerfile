@@ -24,6 +24,7 @@ RUN npm install
 #CMD node index.js
 
 EXPOSE 8080
+curl -XPOST -H "Content-type: application/json" 'http://localhost:8080'
 
 CMD ["npm", "start" ]
 
